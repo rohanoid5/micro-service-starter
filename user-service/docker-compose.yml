@@ -1,25 +1,8 @@
 version: "3.8"
-services:
-  user-service:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "3001:3001"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - PORT=3001
-      - POSTGRES_DB=users
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=postgres
-    depends_on:
-      - postgres
 
+services:
   postgres:
-    image: postgres
+    image: postgres:latest
     environment:
       POSTGRES_DB: users
       POSTGRES_USER: postgres
@@ -27,7 +10,25 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pg-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - ENV_MODE=docker
+      - POSTGRES_DB=users
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+      - /app/node_modules
 
 volumes:
-  pg-data:
+  postgres_data:

@@ -1,15 +1,23 @@
-FROM node:18
+# Use official Node.js LTS image
+FROM node:lts-alpine
 
+# Set working directory
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
-RUN npm install && npm install -g nodemon
 
+# Install dependencies
+RUN npm install
+
+# Copy source files
 COPY . .
 
+# Build TypeScript files
+RUN npm run build
+
+# Expose port
 EXPOSE 3001
 
-# Install dev deps
-RUN npm install -g ts-node-dev
-
-CMD ["npm", "run", "build"]
+# Command to run the application
+CMD ["node", "dist/index.js"]
