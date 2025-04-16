@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes";
-import sequelize from "./config/db";
+import sequelize from "./config/config";
 
 dotenv.config();
 
@@ -22,7 +22,7 @@ const connectWithRetry = async (retries = 5, delay = 3000) => {
       });
       return;
     } catch (err) {
-      console.error("❌ Database connection failed, retrying in 3s...");
+      console.error("❌ Database connection failed, retrying in 3s...", err);
       retries -= 1;
       await new Promise((res) => setTimeout(res, delay));
     }

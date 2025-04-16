@@ -10,7 +10,10 @@
     "build": "tsc",
     "docker:dev": "ENV_MODE=docker npm run dev",
     "local:dev": "ENV_MODE=local npm run dev",
-    "migrate": "npx sequelize-cli db:migrate"
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "migration:create": "bash ./scripts/migrate.sh",
+    "db:update": "bash ./scripts/db-update.sh"
   },
   "keywords": [],
   "author": "",

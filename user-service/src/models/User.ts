@@ -1,11 +1,12 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../config/db";
+import sequelize from "../config/config";
 
 // Define attributes
 interface UserAttributes {
   id: number;
   name: string;
   email: string;
+  role?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -21,7 +22,7 @@ class User
   public id!: number;
   public name!: string;
   public email!: string;
-
+  public role?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -41,12 +42,16 @@ User.init(
       type: DataTypes.STRING,
       unique: true,
     },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: "user",
+    },
   },
   {
     sequelize,
     modelName: "User",
     tableName: "Users",
-  },
+  }
 );
 
 export default User;
