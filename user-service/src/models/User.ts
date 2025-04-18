@@ -1,4 +1,5 @@
 import { DataTypes, Model, Optional } from "sequelize";
+import bcrypt from "bcrypt";
 import sequelize from "../config/config";
 
 // Define attributes
@@ -7,6 +8,7 @@ interface UserAttributes {
   name: string;
   email: string;
   role?: string;
+  password: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -23,6 +25,7 @@ class User
   public name!: string;
   public email!: string;
   public role?: string;
+  public password!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -46,6 +49,10 @@ User.init(
       type: DataTypes.STRING,
       defaultValue: "user",
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -53,5 +60,10 @@ User.init(
     tableName: "Users",
   }
 );
+
+User.beforeCreate(async (user: User) => {
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
+});
 
 export default User;

@@ -1,13 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
-import userRoutes from "./routes/userRoutes";
 import sequelize from "./config/config";
+import userRoutes from "./routes/userRoutes";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use("/api", userRoutes);
+app.use("/api/auth", authRoutes);
 
 const connectWithRetry = async (retries = 5, delay = 3000) => {
   while (retries) {
