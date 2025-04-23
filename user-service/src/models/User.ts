@@ -8,6 +8,14 @@ interface UserAttributes {
   name: string;
   email: string;
   role?: string;
+  age?: number;
+  gender?: string;
+  date_of_birth?: Date;
+  height?: number;
+  weight?: number;
+  height_unit?: string;
+  weight_unit?: string;
+  profile_picture?: string;
   password: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -26,6 +34,14 @@ class User
   public email!: string;
   public role?: string;
   public password!: string;
+  public age?: number;
+  public gender?: string;
+  public date_of_birth?: Date;
+  public height?: number;
+  public weight?: number;
+  public height_unit?: string;
+  public weight_unit?: string;
+  public profile_picture?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -52,6 +68,38 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    date_of_birth: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    height: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    weight: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    height_unit: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    weight_unit: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    profile_picture: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
