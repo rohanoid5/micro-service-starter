@@ -3,12 +3,16 @@ import dotenv from "dotenv";
 import sequelize from "./config/config";
 import userRoutes from "./routes/userRoutes";
 import authRoutes from "./routes/authRoutes";
+import activityRoutes from "./routes/activityRoutes";
+import gpsTrackingRoutes from "./routes/gpsTrackingRoutes";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use("/api", userRoutes);
+app.use("/api", activityRoutes);
+app.use("/api", gpsTrackingRoutes);
 app.use("/api/auth", authRoutes);
 
 const connectWithRetry = async (retries = 5, delay = 3000) => {
