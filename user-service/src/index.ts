@@ -5,6 +5,7 @@ import userRoutes from "./routes/userRoutes";
 import authRoutes from "./routes/authRoutes";
 import activityRoutes from "./routes/activityRoutes";
 import gpsTrackingRoutes from "./routes/gpsTrackingRoutes";
+import workoutSessionRoutes from "./routes/workoutSessionRoutes";
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use("/api", userRoutes);
 app.use("/api", activityRoutes);
 app.use("/api", gpsTrackingRoutes);
+app.use("/api", workoutSessionRoutes);
 app.use("/api/auth", authRoutes);
 
 const connectWithRetry = async (retries = 5, delay = 3000) => {

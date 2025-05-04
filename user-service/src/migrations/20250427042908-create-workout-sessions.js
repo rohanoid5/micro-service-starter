@@ -3,39 +3,35 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("GPSTrackings", {
+    await queryInterface.createTable("WorkoutSessions", {
       id: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
       },
       current_time: {
         type: Sequelize.DATE,
-        allowNull: false,
       },
-      pace: {
+      title: {
+        type: Sequelize.STRING,
+      },
+      sets: {
         type: Sequelize.INTEGER,
-        allowNull: true,
       },
-      elevation: {
+      repetitions: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+      },
+      duration: {
         type: Sequelize.INTEGER,
-        allowNull: true,
       },
-      distance: {
+      perceived_difficulty: {
+        type: Sequelize.STRING,
+      },
+      average_heartbeat: {
         type: Sequelize.INTEGER,
-        allowNull: true,
       },
-      heartbeat: {
+      max_heartbeat: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      latitude: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
-      },
-      longitude: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
       },
       activity_id: {
         type: Sequelize.INTEGER,
@@ -52,6 +48,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable("GPSTrackings");
+    await queryInterface.dropTable("WorkoutSessions");
   },
 };
